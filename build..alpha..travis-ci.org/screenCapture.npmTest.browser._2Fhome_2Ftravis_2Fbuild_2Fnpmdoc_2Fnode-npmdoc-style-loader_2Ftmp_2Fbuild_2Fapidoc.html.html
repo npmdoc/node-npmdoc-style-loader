@@ -1,0 +1,328 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/webpack/style-loader#readme">style-loader (v0.16.1)</a>
+</h1>
+<h4>style loader module for webpack</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.style-loader">module style-loader</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.pitch">
+            function <span class="apidocSignatureSpan">style-loader.</span>pitch
+            <span class="apidocSignatureSpan">(remainingRequest)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.url">
+            function <span class="apidocSignatureSpan">style-loader.</span>url
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.useable">
+            function <span class="apidocSignatureSpan">style-loader.</span>useable
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.style-loader.url">module style-loader.url</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.url.url">
+            function <span class="apidocSignatureSpan">style-loader.</span>url
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.url.pitch">
+            function <span class="apidocSignatureSpan">style-loader.url.</span>pitch
+            <span class="apidocSignatureSpan">(remainingRequest)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.style-loader.useable">module style-loader.useable</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.useable.useable">
+            function <span class="apidocSignatureSpan">style-loader.</span>useable
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.style-loader.useable.pitch">
+            function <span class="apidocSignatureSpan">style-loader.useable.</span>pitch
+            <span class="apidocSignatureSpan">(remainingRequest)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.style-loader" id="apidoc.module.style-loader">module style-loader</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.pitch" id="apidoc.element.style-loader.pitch">
+        function <span class="apidocSignatureSpan">style-loader.</span>pitch
+        <span class="apidocSignatureSpan">(remainingRequest)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pitch = function (remainingRequest) {
+	if(this.cacheable) this.cacheable();
+	var query = loaderUtils.getOptions(this) || {};
+	return [
+		"// style-loader: Adds some css to the DOM by adding a &lt;style&gt; tag",
+		"",
+		"// load the styles",
+		"var content = require(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ");",
+		"if(typeof content === 'string') content = [[module.id, content, '']];",
+		"// add the styles to the DOM",
+		"var update = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "addStyles.js")) + ")(content, " + JSON
+.stringify(query) + ");",
+		"if(content.locals) module.exports = content.locals;",
+		"// Hot Module Replacement",
+		"if(module.hot) {",
+		"	// When the styles change, update the &lt;style&gt; tags",
+		"	if(!content.locals) {",
+		"		module.hot.accept(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ", function() {",
+		"			var newContent = require(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ");",
+		"			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];",
+		"			update(newContent);",
+		"		});",
+		"	}",
+		"	// When the module is disposed, remove the &lt;style&gt; tags",
+		"	module.hot.dispose(function() { update(); });",
+		"}"
+	].join("\n");
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.url" id="apidoc.element.style-loader.url">
+        function <span class="apidocSignatureSpan">style-loader.</span>url
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">url = function () {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.useable" id="apidoc.element.style-loader.useable">
+        function <span class="apidocSignatureSpan">style-loader.</span>useable
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">useable = function () {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.style-loader.url" id="apidoc.module.style-loader.url">module style-loader.url</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.url.url" id="apidoc.element.style-loader.url.url">
+        function <span class="apidocSignatureSpan">style-loader.</span>url
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">url = function () {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.url.pitch" id="apidoc.element.style-loader.url.pitch">
+        function <span class="apidocSignatureSpan">style-loader.url.</span>pitch
+        <span class="apidocSignatureSpan">(remainingRequest)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pitch = function (remainingRequest) {
+	this.cacheable &amp;&amp; this.cacheable();
+	var query = loaderUtils.getOptions(this) || {};
+	return [
+		"// style-loader: Adds some reference to a css file to the DOM by adding a &lt;link&gt; tag",
+		"var update = require(" + JSON.stringify("!" + path.join(__dirname, "addStyleUrl.js")) + ")(",
+		"\trequire(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ")",
+		", " + JSON.stringify(query) + ");",
+		"// Hot Module Replacement",
+		"if(module.hot) {",
+		"\tmodule.hot.accept(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ", function() {",
+		"\t\tupdate(require(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + "));",
+		"\t});",
+		"\tmodule.hot.dispose(function() { update(); });",
+		"}"
+	].join("\n");
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.style-loader.useable" id="apidoc.module.style-loader.useable">module style-loader.useable</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.useable.useable" id="apidoc.element.style-loader.useable.useable">
+        function <span class="apidocSignatureSpan">style-loader.</span>useable
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">useable = function () {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.style-loader.useable.pitch" id="apidoc.element.style-loader.useable.pitch">
+        function <span class="apidocSignatureSpan">style-loader.useable.</span>pitch
+        <span class="apidocSignatureSpan">(remainingRequest)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pitch = function (remainingRequest) {
+	if(this.cacheable) this.cacheable();
+	var query = loaderUtils.getOptions(this) || {};
+	return [
+		"var refs = 0;",
+		"var dispose;",
+		"var content = require(" + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ");",
+		"if(typeof content === 'string') content = [[module.id, content, '']];",
+		"if(content.locals) exports.locals = content.locals;",
+		"exports.use = exports.ref = function() {",
+		"	if(!(refs++)) {",
+		"		dispose = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "addStyles.js")) + ")(content, " + JSON
+.stringify(query) + ");",
+		"	}",
+		"	return exports;",
+		"};",
+		"exports.unuse = exports.unref = function() {",
+		"       if(refs &gt; 0 &amp;&amp; !(--refs)) {",
+		"		dispose();",
+		"		dispose = null;",
+		"	}",
+		"};",
+		"if(module.hot) {",
+		"	var lastRefs = module.hot.data &amp;&amp; module.hot.data.refs || 0;",
+		"	if(lastRefs) {",
+		"		exports.ref();",
+		"		if(!content.locals) {",
+		"			refs = lastRefs;",
+		"		}",
+		"	}",
+		"	if(!content.locals) {",
+		"		module.hot.accept();",
+		"	}",
+		"	module.hot.dispose(function(data) {",
+		"		data.refs = content.locals ? 0 : refs;",
+		"		if(dispose) {",
+		"			dispose();",
+		"		}",
+		"	});",
+		"}"
+	].join("\n");
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
