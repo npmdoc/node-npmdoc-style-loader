@@ -1,7 +1,7 @@
 {
     "author": "kai zhu <kaizhu256@gmail.com>",
     "buildNpmdoc": "style-loader",
-    "description": "api documentation for [style-loader (v0.16.1)](https://github.com/webpack/style-loader#readme) [![npm package](https://img.shields.io/npm/v/npmdoc-style-loader.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-style-loader) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-style-loader.svg)](https://travis-ci.org/npmdoc/node-npmdoc-style-loader)",
+    "description": "#### api documentation for  [style-loader (v0.16.1)](https://github.com/webpack/style-loader#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-style-loader.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-style-loader) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-style-loader.svg)](https://travis-ci.org/npmdoc/node-npmdoc-style-loader)",
     "devDependencies": {
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
         "style-loader": "*",
@@ -36,5 +36,5 @@
         "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
         "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
-    "version": "0.0.2"
+    "version": "0.0.3"
 }
